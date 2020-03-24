@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'pike.sean'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.10
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    systemProperty "baseUrl", project.hasProperty("baseUrl")? project.baseUrl: "https://swapi.co/api"
+}
+
+ext {
+    junitJupiterVersion = '5.6.1'
+    gsonVersion = '2.8.6'
+    restassuredVersion = '4.3.0'
+}
+
+dependencies {
+    //Junit 5
+    testCompile("org.junit.jupiter:junit-jupiter-engine:$junitJupiterVersion")
+    testCompile("org.junit.jupiter:junit-jupiter-api:$junitJupiterVersion")
+
+    //Json handling
+    compile "com.google.code.gson:gson:$gsonVersion"
+
+    // rest-assured
+    compile "io.rest-assured:rest-assured:$restassuredVersion"
+}
